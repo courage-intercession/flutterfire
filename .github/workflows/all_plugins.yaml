@@ -1,5 +1,9 @@
 name: all_plugins
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   pull_request:
     paths-ignore:
@@ -16,7 +20,7 @@ on:
 
 jobs:
   analyze:
-    timeout-minutes: 30
+    timeout-minutes: 45
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
